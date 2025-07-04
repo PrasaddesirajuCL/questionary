@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ask Me Anything - Submit</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 30px; }
+    .hidden { display: none; }
+    label, input, textarea, button { display: block; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <h2>Submit Your Question</h2>
+  <p id="paymentCheck">Checking payment status...</p>
+
+  <form id="questionForm" class="hidden" method="POST" action="https://script.google.com/macros/s/AKfycbwPHOGx2HHtIUSVXOMxvBR1LqVrtYu0xqfMXhtAOnZdm-NmAk2-qQVHLQZoBu7iyh7o/exec">
+    <label for="email">Your Email:</label>
+    <input type="email" name="email" required>
+
+    <label for="question">Your Question:</label>
+    <textarea name="question" required></textarea>
+
+    <button type="submit">Submit Question</button>
+  </form>
+
+  <script>
+    // Show form only if user landed from Razorpay
+    if (document.referrer.includes("razorpay")) {
+      document.getElementById("paymentCheck").textContent = "Payment verified ✅ You can now submit your question.";
+      document.getElementById("questionForm").classList.remove("hidden");
+    } else {
+      document.getElementById("paymentCheck").textContent = "Payment not verified ❌. Please complete the payment first.";
+    }
+  </script>
+
+</body>
+</html>
